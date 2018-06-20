@@ -1,0 +1,42 @@
+.emotion-box-container{
+    border-bottom: 1px solid #e5e5e5;
+    padding: 10px;
+    background: #fff;
+    margin: 10px 0;
+    border-radius: 4px;
+}
+.left-part{
+    float: left;
+}
+.user-img{
+    width: 36px;
+    height: 36px;
+    box-sizing: border-box;
+    border-radius: 50%;
+}
+.right-part{
+    padding: 0 30px 0 51px;
+    text-align: left;
+}
+.user-name{
+    height: 36px;
+    color: #3767c1;
+    line-height: 36px;
+}
+.emotion-content{
+    padding: 0 0 10px;
+}
+.attach-info{
+    color: #3767c1;
+    font-size: 12px;
+}
+.attach-info > span{
+    display: inline-block;
+}
+.attach-time{
+    color: #808080;
+}
+.attach-del{
+    padding: 0 10px;
+    cursor: pointer;
+}

@@ -1,0 +1,27 @@
+.header{
+    height: 70px;
+    background: #7cbceb;
+    color: #fff;
+    position: relative;
+  }
+  .header-content{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 45px;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%)
+  }
+  .header-content::after{
+    content: "";
+    display: block;
+    clear: both;
+
+  }
+  .header-content-title{
+    float: left;
+  }
+  .header-content-menu{
+    float: right;
+    cursor: pointer;
+  }
