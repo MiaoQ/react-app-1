@@ -8,6 +8,12 @@ class Content extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            user: {
+                $ref: 'accounts',
+                $id: this.props.userInfo._id,
+                $db: 'ACCOUNT'
+            },
+            userInfo: this.props.userInfo,
             records: [{
                 key: '',
                 time: '',
@@ -18,7 +24,10 @@ class Content extends Component {
     }
     componentDidMount() {
         fetch.get('getrecords').then((res) => {
-            this.setState({records: JSON.parse(res)});
+            res = JSON.parse(res);
+            if (res.length) {
+                this.setState({records: res});
+            }
         });
     }
     handleUpdateRecord(records){
@@ -27,8 +36,8 @@ class Content extends Component {
     render() {
         return (
             <div className="content">
-                <AddRecordBox updateRecord={this.handleUpdateRecord} />
-                <EmotionBoxes records={this.state.records} updateRecord={this.handleUpdateRecord} />
+                <AddRecordBox user={this.state.user} updateRecord={this.handleUpdateRecord} />
+                <EmotionBoxes userInfo={this.state.userInfo} records={this.state.records} updateRecord={this.handleUpdateRecord} />
             </div>
         );
     }

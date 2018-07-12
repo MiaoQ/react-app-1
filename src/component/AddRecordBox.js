@@ -16,7 +16,7 @@ class AddRecordBox extends Component {
         var time = new Date(),
             key = time.getTime();
         time = time.getFullYear() + '-' + time.getMonth() + '-' + time.getDay() + ' ' + time.getHours() + ':' + time.getMinutes();
-        var obj = {key: key, time: time, txt: this.state.value};
+        var obj = {user: this.props.user, key: key, time: time, txt: this.state.value};
         this.setState({value: ''});
         fetch.post('addrecord', obj).then((res) => {
             this.props.updateRecord(res);

@@ -3,14 +3,15 @@ var url = "mongodb://localhost:27017";
 
 class Emotiondb {
     constructor(user) {
-        this.user = user;
+        this.database = "emotions";
+        this.collection = user;
     }
     createEmotionCollection() {
         var that = this;
         return new Promise((resolve, reject) => {
             MongoClient.connect(url, (err, db) => {
                 if (err) throw err;
-                db.db("EMOTION").createCollection(that.user, (err, res) => {
+                db.db(that.database).createCollection(that.collection, (err, res) => {
                     if (err) throw err;
                     db.close();
                     resolve();
@@ -23,20 +24,21 @@ class Emotiondb {
         return new Promise((resolve, reject) => {
             MongoClient.connect(url, (err, db) => {
                 if (err) throw err;
-                var dbo = db.db("EMOTION");
-                if (Array.isArray(obj)) {
-                    dbo.collection(that.user).insertMany(obj, (err, res) => {
+                /*if (Array.isArray(obj)) {
+                    db.db(that.database).collection(that.collection)
+                    .insertMany(obj, (err, res) => {
                         if (err) throw err;
                         db.close();
                         resolve();
                     });
-                } else {
-                    dbo.collection(that.user).insertOne(obj, (err, res) => {
+                } else {*/
+                    db.db(that.database).collection(that.collection)
+                    .insertOne(obj, (err, res) => {
                         if (err) throw err;
                         db.close();
                         resolve();
                     });
-                }
+                //}
             });
         });
     }
@@ -45,8 +47,8 @@ class Emotiondb {
         return new Promise((resolve, reject) => {
             MongoClient.connect(url, (err, db) => {
                 if (err) throw err;
-                var dbo = db.db("EMOTION");
-                dbo.collection(that.user).updateOne(queryObj, {$set: newObj}, (err, res) => {
+                db.db(that.database).collection(that.collection)
+                .updateOne(queryObj, {$set: newObj}, (err, res) => {
                     if (err) throw err;
                     db.close();
                     resolve();
@@ -59,8 +61,8 @@ class Emotiondb {
         return new Promise((resolve, reject) => {
             MongoClient.connect(url, (err, db) => {
                 if (err) throw err;
-                var dbo = db.db("EMOTION");
-                dbo.collection(that.user).deleteOne(queryObj, (err, res) => {
+                db.db(that.database).collection(that.collection)
+                .deleteOne(queryObj, (err, res) => {
                     if (err) throw err;
                     db.close();
                     resolve();
@@ -75,8 +77,8 @@ class Emotiondb {
         return new Promise((resolve, reject) => {
             MongoClient.connect(url, (err, db) => {
                 if (err) throw err;
-                var dbo = db.db("EMOTION");
-                dbo.collection(that.user).find().sort(desend).limit(count).toArray(function(err, res) {
+                db.db(that.database).collection(that.collection)
+                .find().sort(desend).limit(count).toArray(function(err, res) {
                     if (err) throw err;
                     db.close();
                     resolve(res);

@@ -1,28 +1,36 @@
 import React, { Component } from 'react';
 import './App.css';
+import Login from './component/Login';
 import Header from './component/Header';
 import Content from './component/Content';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {isNavShow: false};
-    this.handleClickHeader = this.handleClickHeader.bind(this);
+    this.state = {
+      isShowContentPage: false,
+      userInfo: ''
+    };
+    this.handleIsShowContentPage = this.handleIsShowContentPage.bind(this);
   }
-
-  handleClickHeader() {
-    this.setState(
-      (prevState) => ({isNavShow: !prevState.isNavShow})
-    )
+  handleIsShowContentPage(obj) {
+    this.setState(obj);
   }
-
   render() {
-    return (
-      <div className="App">
-        <Header updateState={this.handleClickHeader} />
-        <Content />
-      </div>
-    );
+    if (this.state.isShowContentPage) {
+      return (
+        <div className="App">
+          <Header />
+          <Content userInfo={this.state.userInfo} />
+        </div>
+      );
+    } else {
+      return (
+        <div className="App">
+          <Login isShowContentPage={this.handleIsShowContentPage} />
+        </div>
+      );
+    }
   }
 }
 

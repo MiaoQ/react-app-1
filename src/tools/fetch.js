@@ -1,11 +1,13 @@
 class Fetch {
     objToParas(obj) {
-        let i = 0, arr = [];
-        for (let item in obj) { 
-            arr[i] = [item, obj[item]];
-            i++;
+        let paraStr = '';
+        for (let item in obj) {
+            if (obj[item] instanceof Object) {
+                obj[item] = JSON.stringify(obj[item]);
+            }
+            paraStr += item + '=' + encodeURIComponent(obj[item]) + '&';
         }
-        return new URLSearchParams(arr).toString();
+        return paraStr.substring(0, paraStr.length-1);
     }
 
     get(url) {
@@ -36,18 +38,3 @@ class Fetch {
 }
 
 export default Fetch;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
